@@ -71,3 +71,18 @@ CREATE TABLE test (
 ) engine = innodb;
 
 DROP TABLE test;
+
+
+CREATE TABLE sessions (
+    session_id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+    happened_at DATETIME NOT NULL
+) engine = innodb;
+
+CREATE TABLE attendance(
+    attendance_id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+    session_id INT UNSIGNED NOT NULL,
+     FOREIGN KEY(session_id) REFERENCES sessions(session_id),
+    student_id INT UNSIGNED NOT NULL,
+     FOREIGN KEY(student_id) REFERENCES students(student_id)
+
+) engine = innodb;
