@@ -26,3 +26,48 @@ CREATE TABLE parents (
 
 -- Verify that the table is created correct
 show tables;
+
+CREATE TABLE locations (
+    location_id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(255),
+    address VARCHAR(255)
+) engine = innodb;
+
+-- DESCRIBE allows us to see the columns and their data type of a table
+DESCRIBE parents;
+
+-- Create the students table WITHOUT th foreign key
+CREATE TABLE students (
+    student_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(45) NOT NULL,
+    swimming_level VARCHAR(45),
+    dob DATE
+) engine = innodb;
+
+-- To update an existing table
+-- we use ALTER TABLE
+ALTER TABLE students ADD COLUMN parent_id INT UNSIGNED;
+
+-- a foreign key is one possible constraints you can add
+-- to a column
+-- ALTER TABLE <table name> ADD CONSTRAINT <name of constraint>
+ALTER TABLE students ADD CONSTRAINT fk_parents_students
+  FOREIGN KEY(parent_id) REFERENCES parents(parent_id);
+
+-- Delete a column from a table
+ALTER TABLE students DROP COLUMN swimming_level;
+
+-- Add the column back
+ALTER TABLE students ADD COLUMN swimming_level varchar(45);
+
+-- Modify an existing column
+-- Make it such that the swimming_level is an TINYINT UNSIGNED
+ALTER TABLE students MODIFY COLUMN swimming_level TINYINT UNSIGNED;
+
+-- Remove a table
+CREATE TABLE test (
+    test_id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(1000)
+) engine = innodb;
+
+DROP TABLE test;
