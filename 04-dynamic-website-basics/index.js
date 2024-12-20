@@ -1,13 +1,26 @@
 const express = require('express');
 const hbs = require('hbs');
+const waxOn = require('wax-on');
 
 const app = express();
+
+// setup waxon
+waxOn.on(hbs.handlebars); // hbs.handlebars will refer to the geneic version of handlebars
+waxOn.setLayoutPath('views/layouts');
 
 // inform express that we are using hbs as the view engine
 app.set('view engine', 'hbs');
 
+// set up static file
+// app.use --> setup a middleware that affects all routes
+// (ie. a global middleware)
+// if the request is for a static file (image or CSS or JS etc.)
+// then get it from the folder stated as the first parameter
+// (in this case, the folder public)
+app.use(express.static('public'));
+
 app.get("/", function(req,res){
-    res.send("<h1>Hello World</h1>");
+    res.render('home')
 })
 
 app.get("/about-us", function(req,res){
@@ -26,6 +39,10 @@ app.get("/about-us", function(req,res){
      companyName: "ACME Pte Ltd",
      year: new Date().getFullYear()
    });
+});
+
+app.get('/contact-us', function(req,res){
+    res.render('contact-us')
 })
 
 app.listen(3000, function(){

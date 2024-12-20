@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Learn more about our company, mission, and values.">
+    <title>About Us</title>
+    <link href="style.css" rel="stylesheet">
+</head>
+<body>
+     <header>
+        {{#block "header"}}{{/block}}
+    </header>
+    <nav>
+        <a href="/">Home</a>
+        <a href="/about-us">About Us</a>
+        <a href="/contact-us">Contact Us</a>
+    </nav>
+    {{!-- A block is a placeholder that allows
+    content to be added there later --}}
+    <div class="container">
+        {{#block "main-content"}}{{/block}}
+    </div>
+
+  <footer>
+        <p>&copy; {{year}} {{companyName}}. All rights reserved.</p>
+    </footer>
+</body>
+</html>
